@@ -8,5 +8,12 @@
             <column name="Address" type="VARCHAR(255)"/>
             <column name="City" type="VARCHAR(255)"/>
         </createTable>
+        <createTable tableName="Persons123">
+            <column name="PersonID" type="INT"/>
+            <column name="LastName" type="VARCHAR(255)"/>
+            <column name="FirstName" type="VARCHAR(255)"/>
+            <column name="Address" type="VARCHAR(255)"/>
+            <column name="City" type="VARCHAR(255)"/>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
