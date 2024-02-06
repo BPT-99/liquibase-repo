@@ -1,18 +1,22 @@
-stage {
-    stage('Status') {
-        steps {
-            sh 'liquibase status --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
+pipeline {
+    agent any
+    
+    stages {
+        stage('Status') {
+            steps {
+                sh 'liquibase status --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
+            }
+        }
+        stage('Update') {
+            steps {
+                sh 'liquibase update --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
+            }
         }
     }
-    stage('Update') {
-        steps {
-            sh 'liquibase update --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
+    
+    post {
+        always {
+            cleanWs()
         }
     }
 }
-post {
-    always {
-        cleanWs()
-    }
-}
-
