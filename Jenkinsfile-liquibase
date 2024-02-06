@@ -4,20 +4,11 @@ pipeline {
     stages {
         stage('Status') {
             steps {
-                sh 'export PATH=$PATH:/srv'
-                sh 'liquibase status --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
+                script {
+                    def liquibasePath = '/srv'
+                    sh "${liquibasePath}/liquibase status --url=jdbc:mysql://10.0.25.200:3306/test12 --changeLogFile=output_file.xml --username=posa --password=user"
+                }
             }
-        }
-        stage('Update') {
-            steps {
-                sh 'liquibase update --url="jdbc:mysql://10.0.25.200:3306/test12" --changeLogFile=output_file.xml --username=posa --password=user'
-            }
-        }
-    }
-    
-    post {
-        always {
-            cleanWs()
         }
     }
 }
